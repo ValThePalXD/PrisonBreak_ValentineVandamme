@@ -15,7 +15,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
     [Header("Locomotion Parameters")]
     [SerializeField]
-    private float _mass = 75; // [kg]
+    private float _mass = 66.7f; // the average weight of an adult woman in Belgium is 66.7 kg
 
     [SerializeField]
     private float _acceleration = 3; // [m/s^2]
@@ -24,10 +24,11 @@ public class CharacterControllerBehaviour : MonoBehaviour
     private float _dragOnGround = 1; // []
 
     [SerializeField]
-    private float _maxRunningSpeed = (30.0f * 1000) / (60 * 60); // [m/s], 30 km/h
+    private float _maxWalkingSpeed = (5.0f * 1000) / (60 * 60); // setting default forwardspeed
+    private float _maxForwardSpeed = (5.0f * 1000) / (60 * 60); // the average walking speed of a human is about 5 km/h
+    private float _maxBackwardSpeed = ((5.0f/1.3f) * 1000) / (60 * 60); //the average backwards walking speed is about 1.1 times slower than forward speed, after tweaking I found 1.3 times to make the animation smoother and more realistic
 
-    [SerializeField]
-    private float _jumpHeight = 1; // [m]
+   
 
     [Header("Dependencies")]
     [SerializeField, Tooltip("What should determine the absolute forward when a player presses forward.")]
@@ -44,8 +45,9 @@ public class CharacterControllerBehaviour : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _anim = this.gameObject.GetComponent<Animator>();
-            #if DEBUG
-        Assert.IsNotNull(_characterController, "Dependency Error: This component needs a CharachterController to work.");
+#if DEBUG
+        Assert.IsNotNull(_anim, "Dependency Error: This component needs an Animator  to work.");
+        Assert.IsNotNull(_characterController, "Dependency Error: This component needs a CharacterController to work.");
         Assert.IsNotNull(_absoluteForward, "Dependency Error: Set the Absolute Forward field.");
 #endif
     }
@@ -54,16 +56,26 @@ public class CharacterControllerBehaviour : MonoBehaviour
     {
         _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            _jump = true;
-        }
+        
 
         InputY = Input.GetAxis("Vertical");
         InputX = Input.GetAxis("Horizontal");
 
         _anim.SetFloat("InputY", InputY);
         _anim.SetFloat("InputX", InputX);
+
+        if (InputY < 0)
+        {
+
+            _maxWalkingSpeed = _maxBackwardSpeed;
+
+        }
+        else
+        {
+
+            _maxWalkingSpeed = _maxForwardSpeed;
+
+        }
     }
 
     void FixedUpdate()
@@ -73,7 +85,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
         ApplyGravity();
         ApplyMovement();
         ApplyGroundDrag();
-        ApplyJump();
+
 
         LimitMaximumRunningSpeed();
 
@@ -119,33 +131,16 @@ public class CharacterControllerBehaviour : MonoBehaviour
         }
     }
 
-    private void ApplyJump()
-    {
-        //https://en.wikipedia.org/wiki/Equations_of_motion
-        //v^2 = v0^2  + 2*a(r - r0)
-        //v = 0
-        //v0 = ?
-        //a = 9.81
-        //r = 1
-        //r0 = 0
-        //v0 = sqrt(2 * 9.81 * 1) 
-        //but => g is inverted
 
-        if (_jump && _characterController.isGrounded)
-        {
-            _velocity += -Physics.gravity.normalized * Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
-            _jump = false;
 
-        }
 
-    }
 
     private void LimitMaximumRunningSpeed()
     {
         Vector3 yVelocity = Vector3.Scale(_velocity, new Vector3(0, 1, 0));
 
         Vector3 xzVelocity = Vector3.Scale(_velocity, new Vector3(1, 0, 1));
-        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxRunningSpeed);
+        Vector3 clampedXzVelocity = Vector3.ClampMagnitude(xzVelocity, _maxWalkingSpeed);
 
         _velocity = yVelocity + clampedXzVelocity;
     }
