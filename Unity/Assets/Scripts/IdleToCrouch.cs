@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IdleToCrouch : MonoBehaviour {
 
-    public Animator Animator;
+    public Animator _anim;
     public float InputX;
     public float InputY;
 
@@ -13,7 +13,7 @@ public class IdleToCrouch : MonoBehaviour {
 	void Start () {
 
         //get the animator
-        Animator = this.gameObject.GetComponent<Animator>();
+        _anim = this.gameObject.GetComponent<Animator>();
 
 
 
@@ -25,8 +25,8 @@ public class IdleToCrouch : MonoBehaviour {
         InputY = Input.GetAxis("Vertical");
         InputX = Input.GetAxis("Horizontal");
 
-        Animator.SetFloat("InputY", InputY);
-        Animator.SetFloat("InputX", InputX);
+        _anim.SetFloat("InputY", InputY);
+        _anim.SetFloat("InputX", InputX);
 
 		
 	}
