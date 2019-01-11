@@ -90,22 +90,25 @@ public class CharacterControllerBehaviour : MonoBehaviour
         LimitMaximumRunningSpeed();
 
         _characterController.Move(_velocity * Time.deltaTime);
+
+        _anim.SetBool("IsGrounded", _characterController.isGrounded);
     }
 
     private void ApplyGround()
     {
         if (_characterController.isGrounded)
         {
+          
+
             _velocity -= Vector3.Project(_velocity, Physics.gravity.normalized);
         }
     }
 
     private void ApplyGravity()
     {
-        if (!_characterController.isGrounded)
-        {
-            _velocity += Physics.gravity * Time.deltaTime; // g[m/s^2] * t[s]
-        }
+        
+        _velocity += Physics.gravity * Time.deltaTime; // g[m/s^2] * t[s]
+       
     }
 
     private void ApplyMovement()

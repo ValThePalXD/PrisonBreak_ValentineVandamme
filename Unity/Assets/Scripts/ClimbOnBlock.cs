@@ -29,7 +29,7 @@ public class ClimbOnBlock : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Player" && (Input.GetKeyDown(KeyCode.E)))
         other.gameObject.GetComponent<Animator>().SetTrigger("IsClimbing");
     }
 }
