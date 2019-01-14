@@ -147,4 +147,11 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
         _velocity = yVelocity + clampedXzVelocity;
     }
+
+
+
+    public void HalfClimb()
+    {
+        this.gameObject.transform.position = 
+    }
 }
