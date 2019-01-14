@@ -193,21 +193,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3101775
-        functionName: HalfClimb
+      - time: 0.5726775
+        functionName: StartClimb
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.56657773
-        functionName: 3/4Climb
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.945389
+      - time: 0.679764
         functionName: FinishClimb
         data: 
         objectReferenceParameter: {instanceID: 0}

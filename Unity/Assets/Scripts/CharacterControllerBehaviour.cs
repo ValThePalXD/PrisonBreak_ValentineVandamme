@@ -13,6 +13,13 @@ public class CharacterControllerBehaviour : MonoBehaviour
     public float InputX;
     public float InputY;
 
+    [Header("Climbing Parameters")]
+    [SerializeField]
+    private GameObject StartPos;
+
+    [SerializeField]
+    private GameObject EndPos;
+
     [Header("Locomotion Parameters")]
     [SerializeField]
     private float _mass = 66.7f; // the average weight of an adult woman in Belgium is 66.7 kg
@@ -149,9 +156,20 @@ public class CharacterControllerBehaviour : MonoBehaviour
     }
 
 
-
-    public void HalfClimb()
+    #region ClimbingAnimatiom
+    public void StartClimb()
     {
-        this.gameObject.transform.position = 
+        _characterController.height = 0.05f;
+        gameObject.transform.position = StartPos.transform.position;
     }
+
+  
+
+    public void FinishClimb()
+    {
+        _characterController.height = 1.9f;
+        gameObject.transform.position = EndPos.transform.position;
+    }
+
+    #endregion
 }

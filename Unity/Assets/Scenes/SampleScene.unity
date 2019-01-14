@@ -1122,10 +1122,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153433257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.24, y: 12.857, z: 7.19}
+  m_LocalPosition: {x: 21.24, y: 12.857, z: 14.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2040381141}
+  - {fileID: 511538973}
   m_Father: {fileID: 79117168}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1156,8 +1157,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3874731, y: 1, z: 0.7322695}
+  m_Center: {x: 0.30626345, y: 0, z: 0.03687918}
 --- !u!114 &153433264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,6 +1877,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1601845326}
   m_RootOrder: 40
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &511538972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511538973}
+  m_Layer: 0
+  m_Name: Top
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511538973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511538972}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.1, y: 1.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 153433261}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &523475251
 GameObject:
@@ -3652,6 +3683,8 @@ MonoBehaviour:
   _anim: {fileID: 0}
   InputX: 0
   InputY: 0
+  StartPos: {fileID: 2040381140}
+  EndPos: {fileID: 511538972}
   _mass: 66.7
   _acceleration: 2
   _dragOnGround: 30
@@ -8441,6 +8474,10 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 1ecd15c896ead4945ad4e4a5cb7679de, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: 1ecd15c896ead4945ad4e4a5cb7679de, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9145,7 +9182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2040381141}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9159,7 +9196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040381140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.11, z: 0}
+  m_LocalPosition: {x: 1.12, y: -0.068, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 153433261}
