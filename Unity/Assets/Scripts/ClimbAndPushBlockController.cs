@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
-
-public class ClimbOnBlock : MonoBehaviour
+public class ClimbAndPushBlockController : MonoBehaviour
 {
-    //public GameObject Player;
     public Animator ClimbingAnimation;
 
     private void Start()
@@ -18,26 +15,14 @@ public class ClimbOnBlock : MonoBehaviour
 
 
 
-    //void OnTriggerStay()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        ClimbingAnimation.Play ("Climbing");
-    //        Debug.Log("E pressed");
-    //    }
-    //}
-
     private void OnTriggerStay(Collider other)
     {
         if (other.name == "Player" && (Input.GetKeyDown(KeyCode.E)))
             other.gameObject.GetComponent<Animator>().SetTrigger("IsClimbing");
 
 
-    
-    }
-   
-
-
-
+        if (other.name == "Player" && (Input.GetKeyDown(KeyCode.Q)))
+            other.gameObject.GetComponent<Animator>().SetTrigger("IsPushing");
 
     }
+}
