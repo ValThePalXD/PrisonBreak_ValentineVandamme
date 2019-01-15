@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,15 @@ public class CharacterControllerBehaviour : MonoBehaviour
     [Header("Animation Parameters")]
     [SerializeField]
     private Animator _anim;
-    public float InputX;
-    public float InputY;
+
+    [SerializeField]
+    private float InputX;
+
+    [SerializeField]
+    private float InputY;
 
     [Header("Climbing Parameters")]
-    [SerializeField]
-    private GameObject StartPos;
+   
 
     [SerializeField]
     private GameObject EndPos;
@@ -71,7 +75,20 @@ public class CharacterControllerBehaviour : MonoBehaviour
         _anim.SetFloat("InputY", InputY);
         _anim.SetFloat("InputX", InputX);
 
-        if (InputY < 0)
+        if (InputY > -0.3f && InputY < 0.3f)
+        {
+
+            InputY = 0;
+
+        }
+        if (InputX > -0.3f && InputX < 0.3f)
+        {
+
+            InputX = 0;
+
+        }
+
+        if (InputY < 0f)
         {
 
             _maxWalkingSpeed = _maxBackwardSpeed;
@@ -92,13 +109,20 @@ public class CharacterControllerBehaviour : MonoBehaviour
         ApplyGravity();
         ApplyMovement();
         ApplyGroundDrag();
-
+        AnimatorBooleans();
 
         LimitMaximumRunningSpeed();
 
         _characterController.Move(_velocity * Time.deltaTime);
 
+        gameObject.transform.forward = new Vector3(gameObject.transform.forward.x, gameObject.transform.forward.y, _absoluteForward.transform.forward.z);
+
+    }
+
+    private void AnimatorBooleans()
+    {
         _anim.SetBool("IsGrounded", _characterController.isGrounded);
+       
     }
 
     private void ApplyGround()
@@ -157,18 +181,13 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
 
     #region ClimbingAnimatiom
-    public void StartClimb()
-    {
-        _characterController.height = 0.05f;
-        gameObject.transform.position = StartPos.transform.position;
-    }
-
-  
 
     public void FinishClimb()
     {
-        _characterController.height = 1.9f;
+       
         gameObject.transform.position = EndPos.transform.position;
+        _absoluteForward.transform.forward = new Vector3 (EndPos.transform.forward.x, EndPos.transform.forward.y, EndPos.transform.forward.z);
+            
     }
 
     #endregion

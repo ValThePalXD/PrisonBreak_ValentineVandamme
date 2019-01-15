@@ -17,7 +17,7 @@ public class ClimbAndPushBlockController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "Player" && (Input.GetKeyDown(KeyCode.E)))
+        if (other.name == "Player" && (Input.GetButtonDown("AButton")))
             other.gameObject.GetComponent<Animator>().SetTrigger("IsClimbing");
 
 

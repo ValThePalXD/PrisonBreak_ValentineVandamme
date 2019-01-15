@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour {
 
     //toad camera
 
-        //Camera move
+    //Camera move
     
     public Transform LookAt;
     public Transform CamTransForm;
@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour {
     private const float Y_ANGLE_MIN = 0.0f;    
     private const float Y_ANGLE_MAX=  89.0f;
 
-    private float _distance = 10.0f;
+    private float _distance = 5.0f;
     private float _currentX = 0.0f;
     private float _currentY = 0.0f;
 
