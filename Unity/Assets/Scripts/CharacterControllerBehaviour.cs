@@ -18,8 +18,8 @@ public class CharacterControllerBehaviour : MonoBehaviour
     [SerializeField]
     private float InputY;
 
+
     [Header("Climbing Parameters")]
-   
 
     [SerializeField]
     private GameObject EndPos;
@@ -122,6 +122,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
     private void AnimatorBooleans()
     {
         _anim.SetBool("IsGrounded", _characterController.isGrounded);
+       
        
     }
 
