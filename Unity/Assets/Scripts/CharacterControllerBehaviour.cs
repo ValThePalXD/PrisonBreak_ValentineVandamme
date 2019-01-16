@@ -115,7 +115,10 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
         _characterController.Move(_velocity * Time.deltaTime);
 
-        gameObject.transform.forward = new Vector3(gameObject.transform.forward.x, gameObject.transform.forward.y, _absoluteForward.transform.forward.z);
+       
+        gameObject.transform.forward = new Vector3(_absoluteForward.transform.forward.x, gameObject.transform.forward.y, _absoluteForward.transform.forward.z);
+
+
 
     }
 
