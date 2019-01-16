@@ -191,7 +191,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
        
         gameObject.transform.position = EndPos.transform.position;
         _absoluteForward.transform.forward = new Vector3 (EndPos.transform.forward.x, EndPos.transform.forward.y, EndPos.transform.forward.z);
-            
+        Debug.Log("qrjwjegkltrkbjhtrbbehrbjghrejhgv");
     }
 
     #endregion

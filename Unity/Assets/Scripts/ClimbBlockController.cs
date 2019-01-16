@@ -17,6 +17,7 @@ public class ClimbBlockController : MonoBehaviour
     {
         if (other.name == "Player" && (Input.GetButtonDown("AButton")))
             other.gameObject.GetComponent<Animator>().SetTrigger("IsClimbing");
+            other.gameObject.transform.forward = new Vector3(other.gameObject.transform.forward.x, this.gameObject.transform.forward.y, other.gameObject.transform.forward.z);
         
       
     }
