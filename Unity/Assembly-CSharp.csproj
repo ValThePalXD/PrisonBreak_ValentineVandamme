@@ -68,6 +68,7 @@
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\CelDoorCloseScript.cs" />
     <Compile Include="Assets\Scripts\CharacterControllerBehaviour.cs" />
     <Compile Include="Assets\Scripts\ClimbBlockController.cs" />
     <Compile Include="Assets\Scripts\PushBlockController.cs" />

@@ -12,7 +12,14 @@ public class CameraScript : MonoBehaviour {
     public Transform LookAt;
     public Transform CamTransForm;
 
-  
+    public Animator Animator;
+
+    
+
+    public bool CameraRotation= true;
+
+    public Transform ClimbPos;
+    
 
     //max angle almost 90 but not 90 because then u cant turn left and right anymore
     private const float Y_ANGLE_MIN = 0.0f;    
@@ -34,7 +41,10 @@ public class CameraScript : MonoBehaviour {
     {
 
         //camera rotation movement
-        MoveCameraStart();
+
+       if (CameraRotation)
+            MoveCameraStart();
+
 
        
 
@@ -44,8 +54,27 @@ public class CameraScript : MonoBehaviour {
     void Update () {
 
 
+        if (Animator.GetBool("IsClimbing"))
+        {
+            Debug.Log("oopsiedoopsie");
+            CameraRotation = false;
+            CamTransForm.transform.forward = new Vector3(ClimbPos.transform.forward.x, ClimbPos.transform.forward.y, ClimbPos.transform.forward.z);
+            CamTransForm.transform.position = new Vector3(ClimbPos.transform.position.x, ClimbPos.transform.position.y, ClimbPos.position.z);
+
+        }
+
+        if (Input.GetAxis("Horizontal")>0f|| Input.GetAxis("Vertical")>0f|| Input.GetAxis("HorizontalCam")>0f || Input.GetAxis("VerticalCam")>0f|| Input.GetAxis("Horizontal") < 0f || Input.GetAxis("Vertical") < 0f || Input.GetAxis("HorizontalCam") < 0f || Input.GetAxis("VerticalCam") < 0f)
+        {
+            
+
+            CameraRotation = true;
+        }
+
         //camera rotation movement
-        MoveCameraUpdate();
+        if (CameraRotation)
+        {
+            MoveCameraUpdate();
+        }
 
        
        

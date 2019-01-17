@@ -16,9 +16,18 @@ public class ClimbBlockController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.name == "Player" && (Input.GetButtonDown("AButton")))
-            other.gameObject.GetComponent<Animator>().SetTrigger("IsClimbing");
-            other.gameObject.transform.forward = new Vector3(other.gameObject.transform.forward.x, this.gameObject.transform.forward.y, other.gameObject.transform.forward.z);
-        
-      
+        {
+            other.gameObject.GetComponent<Animator>().SetBool("IsClimbing", true);
+            //other.gameObject.GetComponent<CharacterController>().enabled = false;
+        }
     }
+
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.name == "Player")
+    //    {
+    //        other.gameObject.GetComponent<CharacterController>().enabled = true;
+    //    }
+    //}
 }

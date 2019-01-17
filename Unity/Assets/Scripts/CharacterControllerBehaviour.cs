@@ -189,12 +189,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
     #region ClimbingAnimatiom
 
-    public void StartClimb()
-    {
-       // _absoluteForward.transform.localEulerAngles = new Vector3(gameObject.transform.localEulerAngles.x, StartPos.transform.localEulerAngles.y, gameObject.transform.localEulerAngles.z);
-        gameObject.transform.localEulerAngles = new Vector3(gameObject.transform.forward.x, StartPos.transform.forward.y, gameObject.transform.forward.z);
-
-    }
+   
 
 
 
@@ -202,7 +197,8 @@ public class CharacterControllerBehaviour : MonoBehaviour
     {
 
         gameObject.transform.position = EndPos.transform.position;
-        //_absoluteForward.transform.forward = new Vector3 (EndPos.transform.forward.x, EndPos.transform.forward.y, EndPos.transform.forward.z);
+        _anim.SetBool("IsClimbing", false);
+      
 
     }
 
