@@ -2,17 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//Verschil Erven & Implementeren
+
 
 public class SelectorNode : CompositeNode
 {
-    //Methode die n aantal parameters kan hebben
+  
     public SelectorNode(params INode[] nodes) : base(nodes)
     {
 
     }
 
-    //Selector node will keep ticking until it finds a succes
+ 
     public override IEnumerator<NodeResult> Tick()
     {
         NodeResult returnNodeResult = NodeResult.Failure;

@@ -2,13 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CelDoorCloseScript : MonoBehaviour
 {
-    public GameObject Door;
-    public Transform MoveTo;
 
+    [Header("Movement Parameters")]
+    [SerializeField]
+    private Transform Door;
 
+    [SerializeField]
+    private Transform MoveTo;
+
+    void Start()
+    {
+        
+#if DEBUG
+        Assert.IsNotNull(Door, "Dependency Error: This component needs a Transform to work on.");
+        Assert.IsNotNull(MoveTo, "Dependency Error: This component needs a Transform to move to.");
+       
+#endif
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +36,6 @@ public class CelDoorCloseScript : MonoBehaviour
 
     private void CelDoorClosing()
     {
-        Door.transform.position = Vector3.Lerp(Door.transform.position, MoveTo.position, 0.5f);
+        Door.position = Vector3.Lerp(Door.transform.position, MoveTo.position, 0.5f);
     }
 }

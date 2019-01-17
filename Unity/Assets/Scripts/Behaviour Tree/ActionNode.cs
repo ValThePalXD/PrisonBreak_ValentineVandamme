@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ActionNode : INode
 {
-    //readonly - een keer toekennen daarna niet meer veranderbaar
+   
 
     public delegate IEnumerator<NodeResult> Action();
     private readonly Action _action;

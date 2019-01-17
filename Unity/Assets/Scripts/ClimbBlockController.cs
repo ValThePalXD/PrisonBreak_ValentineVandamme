@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class ClimbBlockController : MonoBehaviour
 {
-    public Animator Animator;
-
-    private void Start()
-    {
-        Animator = GetComponent<Animator>();
-
-
-    }
+ 
 
     private void OnTriggerStay(Collider other)
     {

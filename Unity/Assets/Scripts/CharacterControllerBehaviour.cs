@@ -39,7 +39,11 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
     [SerializeField]
     private float _maxWalkingSpeed = (5.0f * 1000) / (60 * 60); // setting default forwardspeed
+
+    [SerializeField]
     private float _maxForwardSpeed = (5.0f * 1000) / (60 * 60); // the average walking speed of a human is about 5 km/h
+
+    [SerializeField]
     private float _maxBackwardSpeed = ((5.0f/1.3f) * 1000) / (60 * 60); //the average backwards walking speed is about 1.1 times slower than forward speed, after tweaking I found 1.3 times to make the animation smoother and more realistic
 
    
@@ -48,12 +52,13 @@ public class CharacterControllerBehaviour : MonoBehaviour
     [SerializeField, Tooltip("What should determine the absolute forward when a player presses forward.")]
     private Transform _absoluteForward;
 
+    [SerializeField]
     private CharacterController _characterController;
 
     private Vector3 _velocity = Vector3.zero;
 
     private Vector3 _movement;
-    private bool _jump;
+
 
     void Start()
     {
@@ -79,19 +84,8 @@ public class CharacterControllerBehaviour : MonoBehaviour
         _anim.SetFloat("InputY", InputY);
         _anim.SetFloat("InputX", InputX);
 
-        //if (InputY > -0.3f && InputY < 0.3f)
-        //{
-
-        //    InputY = 0;
-
-        //}
-        //if (InputX > -0.3f && InputX < 0.3f)
-        //{
-
-        //    InputX = 0;
-
-        //}
-
+   
+        //if u walk backwards, you go slower
         if (InputY < 0f)
         {
 
@@ -113,25 +107,39 @@ public class CharacterControllerBehaviour : MonoBehaviour
         ApplyGravity();
         ApplyMovement();
         ApplyGroundDrag();
-        AnimatorBooleans();
 
+        AnimatorBooleans();
+        
+        CamFollow();
+
+       
         LimitMaximumRunningSpeed();
 
         _characterController.Move(_velocity * Time.deltaTime);
 
-       
-        gameObject.transform.forward = new Vector3(_absoluteForward.transform.forward.x, gameObject.transform.forward.y, _absoluteForward.transform.forward.z);
-
-
-
     }
 
+    #region Camera
+
+    private void CamFollow()
+    {
+        gameObject.transform.forward = new Vector3(_absoluteForward.transform.forward.x, gameObject.transform.forward.y, _absoluteForward.transform.forward.z);
+    }
+
+    #endregion
+
+
+    #region Animator
     private void AnimatorBooleans()
     {
         _anim.SetBool("IsGrounded", _characterController.isGrounded);
        
        
     }
+    #endregion
+
+
+    #region CharController
 
     private void ApplyGround()
     {
@@ -187,10 +195,10 @@ public class CharacterControllerBehaviour : MonoBehaviour
         _velocity = yVelocity + clampedXzVelocity;
     }
 
+    #endregion
+
 
     #region AnimationEvents
-
-   
 
 
 

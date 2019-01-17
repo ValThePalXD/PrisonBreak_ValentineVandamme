@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityScript.Steps;
-//Currying Example
-//Curry method
+
 
 public class Test
 {
@@ -10,9 +9,7 @@ public class Test
 
     public add CreateAdder(int i)
     {
-        //InputParameters => Expressions
-        //When creating CreateAdder(int i), you will assign the i
-        //when calling the var originally made, you will assign the a
+      
         return (a) => (i + a);
     }
 
@@ -22,9 +19,9 @@ public class Test
         var addSomeNumber = CreateAdder(i);
 
         var addTwo = CreateAdder(2);
-        //a+3
+      
         var AddThree = CreateAdder(3);
-        //5+3
+        
         Debug.Log(addTwo(5));
         
     }
@@ -43,15 +40,12 @@ public class Test
 
 
 
-
-//Delegate is niet voldoende
-//we hebben iets nodig die states heeft -> interface
 public interface ParallelNodePolicyAccumulator
 {
     NodeResult Policy(NodeResult result);
 }
 
-//If N succes' , stop ParallelNode
+
 public class NSuccesIsSuccesAccumulator : ParallelNodePolicyAccumulator
 {    
 
@@ -59,7 +53,7 @@ public class NSuccesIsSuccesAccumulator : ParallelNodePolicyAccumulator
     {
         return new NSuccesIsSuccesAccumulator(2);
     }
-    //currying ?
+   
     public static ParallelNode.Policy Factory(int n)
     {
         return () => new NSuccesIsSuccesAccumulator(n);
@@ -83,5 +77,5 @@ public class NSuccesIsSuccesAccumulator : ParallelNodePolicyAccumulator
     }
 }
 
-//Add other Policies Below
+
 

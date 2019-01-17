@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PushBlockController : MonoBehaviour
 {
 
-    public GameObject _box;
+    [Header("Gameobject Parameters")]
+    [SerializeField]
+    private GameObject Box;
 
-   
 
-    private void Start()
+    void Start()
     {
-       
-
-
+   
+#if DEBUG
+        Assert.IsNotNull(Box, "Dependency Error: This component needs a GameObject to push.");
+        
+#endif
     }
+
 
 
     private void OnTriggerStay(Collider other)
@@ -29,7 +34,7 @@ public class PushBlockController : MonoBehaviour
 
                 Debug.Log("oof");
 
-                other.gameObject.transform.forward = new Vector3(_box.transform.forward.x, _box.gameObject.transform.forward.y, _box.transform.forward.z);
+                other.gameObject.transform.forward = new Vector3(Box.transform.forward.x, Box.gameObject.transform.forward.y, Box.transform.forward.z);
             }
         }
     }
@@ -41,8 +46,10 @@ public class PushBlockController : MonoBehaviour
 
     private void PushingBox()
         {
-            _box.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 12, ForceMode.Force);
+            Box.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 12, ForceMode.Force);
         }
+
+
 
 }
 

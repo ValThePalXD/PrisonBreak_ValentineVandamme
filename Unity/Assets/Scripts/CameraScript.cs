@@ -2,24 +2,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CameraScript : MonoBehaviour {
 
-    //toad camera
+    [Header("Camera Parameters")]
+    [SerializeField]
+    private Transform LookAt;
 
-    //Camera move
-    
-    public Transform LookAt;
-    public Transform CamTransForm;
+    [SerializeField]
+    private Transform CamTransForm;
 
-    public Animator Animator;
+    [SerializeField]
+    private bool CameraRotation= true;
 
-    
+    [Header("Animation Parameters")]
+    [SerializeField]
+    private Animator Animator;
 
-    public bool CameraRotation= true;
+    [SerializeField]
+    private Transform ClimbPos;
 
-    public Transform ClimbPos;
-    public Transform PushPos;
+    [SerializeField]
+    private Transform PushPos;
+
+
     
 
     //max angle almost 90 but not 90 because then u cant turn left and right anymore
@@ -45,9 +52,12 @@ public class CameraScript : MonoBehaviour {
 
        if (CameraRotation)
             MoveCameraStart();
+#if DEBUG
+        Assert.IsNotNull(Animator, "Dependency Error: This component needs an Animator  to work.");
+        Assert.IsNotNull(LookAt, "Dependency Error: This component needs a transform to look at.");
+#endif
 
 
-       
 
     }
 
@@ -59,8 +69,9 @@ public class CameraScript : MonoBehaviour {
         {
            
             CameraRotation = false;
-            CamTransForm.transform.forward = new Vector3(ClimbPos.transform.forward.x, ClimbPos.transform.forward.y, ClimbPos.transform.forward.z);
-            CamTransForm.transform.position = new Vector3(ClimbPos.transform.position.x, ClimbPos.transform.position.y, ClimbPos.position.z);
+            ChangeClimbPos();
+
+           
 
         }
 
@@ -68,19 +79,27 @@ public class CameraScript : MonoBehaviour {
         {
 
             CameraRotation = false;
-            CamTransForm.transform.forward = new Vector3(PushPos.transform.forward.x, PushPos.transform.forward.y, PushPos.transform.forward.z);
-            CamTransForm.transform.position = new Vector3(PushPos.transform.position.x, PushPos.transform.position.y, PushPos.position.z);
+            ChangePushPos();
+        
+           
 
         }
 
-        if (Input.GetAxis("Horizontal")>0f|| Input.GetAxis("Vertical")>0f|| Input.GetAxis("HorizontalCam")>0f || Input.GetAxis("VerticalCam")>0f|| Input.GetAxis("Horizontal") < 0f || Input.GetAxis("Vertical") < 0f || Input.GetAxis("HorizontalCam") < 0f || Input.GetAxis("VerticalCam") < 0f)
+        if (Input.GetAxis("Horizontal")>0f|| 
+            Input.GetAxis("Vertical")>0f|| 
+            Input.GetAxis("HorizontalCam")>0f || 
+            Input.GetAxis("VerticalCam")>0f|| 
+            Input.GetAxis("Horizontal") < 0f || 
+            Input.GetAxis("Vertical") < 0f || 
+            Input.GetAxis("HorizontalCam") < 0f || 
+            Input.GetAxis("VerticalCam") < 0f)
         {
             
 
             CameraRotation = true;
         }
 
-        //camera rotation movement
+        
         if (CameraRotation)
         {
             MoveCameraUpdate();
@@ -90,9 +109,25 @@ public class CameraScript : MonoBehaviour {
        
 
     }
+    #region PositionChangesAnimation
 
 
-    #region Start
+    private void ChangePushPos()
+    {
+        CamTransForm.transform.forward = new Vector3(PushPos.transform.forward.x, PushPos.transform.forward.y, PushPos.transform.forward.z);
+        CamTransForm.transform.position = new Vector3(PushPos.transform.position.x, PushPos.transform.position.y, PushPos.position.z);
+    }
+
+    private void ChangeClimbPos()
+    {
+        CamTransForm.transform.forward = new Vector3(ClimbPos.transform.forward.x, ClimbPos.transform.forward.y, ClimbPos.transform.forward.z);
+        CamTransForm.transform.position = new Vector3(ClimbPos.transform.position.x, ClimbPos.transform.position.y, ClimbPos.position.z);
+    }
+
+    #endregion
+
+
+    #region Camera
 
     private void MoveCameraStart()
     {
@@ -101,10 +136,9 @@ public class CameraScript : MonoBehaviour {
     }
 
    
+    
 
-    #endregion Start
-
-    #region Update
+    
 
     private void MoveCameraUpdate()
     {
@@ -133,11 +167,11 @@ public class CameraScript : MonoBehaviour {
 
     }
 
- 
-
     #endregion
 
-    
+
+
+
 
 
 

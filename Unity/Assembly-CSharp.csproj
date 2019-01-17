@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Behaviour Tree\AIBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviour Tree\CompositeNode.cs" />
     <Compile Include="Assets\Scripts\Behaviour Tree\ConditionNode.cs" />
+    <Compile Include="Assets\Scripts\Behaviour Tree\DemoYieldBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviour Tree\iNode.cs" />
     <Compile Include="Assets\Scripts\Behaviour Tree\NodeResult.cs" />
     <Compile Include="Assets\Scripts\Behaviour Tree\ParallelNode.cs" />
@@ -81,9 +82,8 @@
     <Compile Include="Assets\Scripts\CelDoorCloseScript.cs" />
     <Compile Include="Assets\Scripts\CharacterControllerBehaviour.cs" />
     <Compile Include="Assets\Scripts\ClimbBlockController.cs" />
-    <Compile Include="Assets\Scripts\DemoYieldBehaviour.cs" />
+    <Compile Include="Assets\Scripts\IKPressButtonScript.cs" />
     <Compile Include="Assets\Scripts\PushBlockController.cs" />
-    <Compile Include="Assets\Scripts\SheepAIBehaviour.cs" />
     <Compile Include="Assets\ThirdParty\NavMeshComponents\Scripts\NavMeshLink.cs" />
     <Compile Include="Assets\ThirdParty\NavMeshComponents\Scripts\NavMeshModifier.cs" />
     <Compile Include="Assets\ThirdParty\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />

@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-//Loopt over verschillende nodes heen en kan via een policy
-//zeggen wat er moet gebeuren
+
 public class ParallelNode : CompositeNode
 {
-    //public delegate NodeResult Policy(NodeResult result);
+    
 
     public delegate ParallelNodePolicyAccumulator Policy();
     private Policy _policy;
@@ -37,22 +36,5 @@ public class ParallelNode : CompositeNode
         yield return returnNodeResult;
     }
 
-    //public override NodeResult Tick()
-    //{
-    //    NodeResult result = NodeResult.Failure;
-    //    foreach(INode node in _nodes)
-    //    {
-    //        if(result == NodeResult.Failure)
-    //        {
-    //            count++;
-    //        }
-    //    }
-    //    if (count >= 4)
-    //    {
-    //        result = NodeResult.Failure;
-    //    }
-    //    else
-    //        result = NodeResult.Succes;
-    //    return result;
-    //}
+    
 }
