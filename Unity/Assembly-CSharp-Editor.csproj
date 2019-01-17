@@ -111,6 +111,11 @@
     <Compile Include="Assets\ProCore\ProBuilder\Editor\pb_MissingScriptEditor.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\Editor\pb_Preferences.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\Editor\pb_ScenePostProcessor.cs" />
+    <Compile Include="Assets\ThirdParty\NavMeshComponents\Editor\NavMeshComponentsGUIUtility.cs" />
+    <Compile Include="Assets\ThirdParty\NavMeshComponents\Editor\NavMeshLinkEditor.cs" />
+    <Compile Include="Assets\ThirdParty\NavMeshComponents\Editor\NavMeshModifierEditor.cs" />
+    <Compile Include="Assets\ThirdParty\NavMeshComponents\Editor\NavMeshModifierVolumeEditor.cs" />
+    <Compile Include="Assets\ThirdParty\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/valen/Desktop/IGP/sem 3/platdev 3/PrisonBreak/PrisonBreak_ValentineVandamme/Unity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

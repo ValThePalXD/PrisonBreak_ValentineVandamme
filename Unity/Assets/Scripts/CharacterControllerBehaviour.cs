@@ -187,7 +187,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
     }
 
 
-    #region ClimbingAnimatiom
+    #region AnimationEvents
 
    
 
@@ -201,7 +201,12 @@ public class CharacterControllerBehaviour : MonoBehaviour
       
 
     }
+    
+    public void FinishPush()
+    {
+        _anim.SetBool("IsPushing", false);
 
+    }
 
 
     #endregion

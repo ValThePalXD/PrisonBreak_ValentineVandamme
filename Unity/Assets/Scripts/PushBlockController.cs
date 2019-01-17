@@ -6,6 +6,7 @@ public class PushBlockController : MonoBehaviour
 {
 
     public GameObject _box;
+
    
 
     private void Start()
@@ -28,20 +29,21 @@ public class PushBlockController : MonoBehaviour
 
                 Debug.Log("oof");
 
-                other.gameObject.transform.forward = new Vector3(_box.transform.forward.x, other.gameObject.transform.forward.y, _box.transform.forward.z);
+                other.gameObject.transform.forward = new Vector3(_box.transform.forward.x, _box.gameObject.transform.forward.y, _box.transform.forward.z);
             }
         }
     }
+   
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "Player")
-            other.gameObject.GetComponent<Animator>().SetBool("IsPushing", false);
-    }
+
+
+    
 
     private void PushingBox()
         {
             _box.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 12, ForceMode.Force);
         }
+
 }
+
 

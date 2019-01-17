@@ -19,6 +19,7 @@ public class CameraScript : MonoBehaviour {
     public bool CameraRotation= true;
 
     public Transform ClimbPos;
+    public Transform PushPos;
     
 
     //max angle almost 90 but not 90 because then u cant turn left and right anymore
@@ -56,10 +57,19 @@ public class CameraScript : MonoBehaviour {
 
         if (Animator.GetBool("IsClimbing"))
         {
-            Debug.Log("oopsiedoopsie");
+           
             CameraRotation = false;
             CamTransForm.transform.forward = new Vector3(ClimbPos.transform.forward.x, ClimbPos.transform.forward.y, ClimbPos.transform.forward.z);
             CamTransForm.transform.position = new Vector3(ClimbPos.transform.position.x, ClimbPos.transform.position.y, ClimbPos.position.z);
+
+        }
+
+        if (Animator.GetBool("IsPushing"))
+        {
+
+            CameraRotation = false;
+            CamTransForm.transform.forward = new Vector3(PushPos.transform.forward.x, PushPos.transform.forward.y, PushPos.transform.forward.z);
+            CamTransForm.transform.position = new Vector3(PushPos.transform.position.x, PushPos.transform.position.y, PushPos.position.z);
 
         }
 
