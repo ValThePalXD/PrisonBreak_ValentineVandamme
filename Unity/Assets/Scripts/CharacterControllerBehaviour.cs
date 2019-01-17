@@ -68,6 +68,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
     void Update()
     {
+
         _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         
@@ -78,18 +79,18 @@ public class CharacterControllerBehaviour : MonoBehaviour
         _anim.SetFloat("InputY", InputY);
         _anim.SetFloat("InputX", InputX);
 
-        if (InputY > -0.3f && InputY < 0.3f)
-        {
+        //if (InputY > -0.3f && InputY < 0.3f)
+        //{
 
-            InputY = 0;
+        //    InputY = 0;
 
-        }
-        if (InputX > -0.3f && InputX < 0.3f)
-        {
+        //}
+        //if (InputX > -0.3f && InputX < 0.3f)
+        //{
 
-            InputX = 0;
+        //    InputX = 0;
 
-        }
+        //}
 
         if (InputY < 0f)
         {
