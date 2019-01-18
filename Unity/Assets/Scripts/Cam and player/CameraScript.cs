@@ -23,8 +23,7 @@ public class CameraScript : MonoBehaviour {
     [SerializeField]
     private Transform ClimbPos;
 
-    [SerializeField]
-    private Transform PushPos;
+   
 
 
     
@@ -75,15 +74,7 @@ public class CameraScript : MonoBehaviour {
 
         }
 
-        if (Animator.GetBool("IsPushing"))
-        {
-
-            CameraRotation = false;
-            ChangePushPos();
         
-           
-
-        }
 
         if (Input.GetAxis("Horizontal")>0f|| 
             Input.GetAxis("Vertical")>0f|| 
@@ -112,12 +103,7 @@ public class CameraScript : MonoBehaviour {
     #region PositionChangesAnimation
 
 
-    private void ChangePushPos()
-    {
-        CamTransForm.transform.forward = new Vector3(PushPos.transform.forward.x, PushPos.transform.forward.y, PushPos.transform.forward.z);
-        CamTransForm.transform.position = new Vector3(PushPos.transform.position.x, PushPos.transform.position.y, PushPos.position.z);
-    }
-
+   
     private void ChangeClimbPos()
     {
         CamTransForm.transform.forward = new Vector3(ClimbPos.transform.forward.x, ClimbPos.transform.forward.y, ClimbPos.transform.forward.z);

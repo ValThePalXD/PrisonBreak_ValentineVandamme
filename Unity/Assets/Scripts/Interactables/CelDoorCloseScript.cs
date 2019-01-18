@@ -14,6 +14,12 @@ public class CelDoorCloseScript : MonoBehaviour
     [SerializeField]
     private Transform MoveTo;
 
+    [Header("Animator parameters")]
+    [SerializeField]
+    private Animator animator;
+
+   
+
     void Start()
     {
         
@@ -29,7 +35,18 @@ public class CelDoorCloseScript : MonoBehaviour
         if (other.gameObject.tag == "push")
         {
             CelDoorClosing();
+
+           
+                animator.SetBool("IsTrapped", true);
+            
         }
+
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        
 
 
     }

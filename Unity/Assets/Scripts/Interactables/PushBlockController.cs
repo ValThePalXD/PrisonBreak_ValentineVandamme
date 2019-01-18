@@ -29,20 +29,22 @@ public class PushBlockController : MonoBehaviour
         {
             other.gameObject.GetComponent<Animator>().SetBool("IsPushing", true);
             PushingBox();
-            if (other.gameObject.GetComponent<Animator>().GetBool("IsPushing"))
-            {
-
-                Debug.Log("oof");
-
-                other.gameObject.transform.forward = new Vector3(Box.transform.forward.x, Box.gameObject.transform.forward.y, Box.transform.forward.z);
-            }
+         
         }
     }
-   
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Player")
+        {
+
+            other.gameObject.GetComponent<Animator>().SetBool("IsPushing", false);
+        }
+    }
 
 
 
-    
+
 
     private void PushingBox()
         {

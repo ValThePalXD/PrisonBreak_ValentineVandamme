@@ -12,9 +12,12 @@ public class AIBehaviour : MonoBehaviour
     private NavMeshAgent _agent;
     private Animator animator;
 
-    private float _maxRoamDistance = 10.0f;
+    private bool FoundPlayer = false;
+    private bool IsTrappedByPlayer = false;
 
-    //met velocity
+    private readonly float _maxRoamDistance = 10.0f;
+
+    
 
 
     // Start is called before the first frame update
@@ -44,7 +47,7 @@ public class AIBehaviour : MonoBehaviour
              new SequenceNode
             (
                 new ConditionNode(Found),
-                new ActionNode(AimAt)
+                new ActionNode(Aim)
 
 
              ));
@@ -69,10 +72,26 @@ public class AIBehaviour : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+        if (animator.GetBool("Found"))
+        {
+            
+            FoundPlayer = true;
+        }
+
+        if (animator.GetBool("IsTrapped"))
+        {
+            IsTrappedByPlayer = true;
+        }
+
+
+    }
 
     bool IsTrapped()
     {
-        return false;
+        return IsTrappedByPlayer;
     }
 
 
@@ -85,23 +104,16 @@ public class AIBehaviour : MonoBehaviour
 
     bool Found()
     {
-       
-        return false;
+      
+        return FoundPlayer;
     }
-    //private void Update()
-    //{
-            
-    // if (animator.GetBool("Found"))
-    //    {
-    //        Debug.Log("jaaaajaaa mannekes");
-    //        Found = true;
-    //    }
-    //}
 
-IEnumerator<NodeResult> PlayAngryAnimation()
+    IEnumerator<NodeResult> PlayAngryAnimation()
     {
 
-        //play the animation
+      
+        _agent.velocity = Vector3.zero;
+        _agent.enabled = false;
 
 
         yield return NodeResult.Succes;
@@ -111,7 +123,6 @@ IEnumerator<NodeResult> PlayAngryAnimation()
     IEnumerator<NodeResult> LookingFor()
     {
 
-        //walk around
         AIAnimation();
 
         if (_agent.remainingDistance <= _agent.stoppingDistance)
@@ -133,12 +144,12 @@ IEnumerator<NodeResult> PlayAngryAnimation()
     }
 
 
-    IEnumerator<NodeResult> AimAt()
+    IEnumerator<NodeResult> Aim()
     {
 
-        //look at player
-        _maxRoamDistance = 0;
-
+      
+        _agent.velocity = Vector3.zero;
+        _agent.enabled = false;
 
         yield return NodeResult.Succes;
     }

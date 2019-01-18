@@ -9,6 +9,8 @@ TagManager:
   - dance
   - reload
   - praying
+  - enemy
+  - trap
   layers:
   - Default
   - TransparentFX
