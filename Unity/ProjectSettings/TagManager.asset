@@ -6,6 +6,9 @@ TagManager:
   tags:
   - push
   - climb
+  - dance
+  - reload
+  - praying
   layers:
   - Default
   - TransparentFX

@@ -85,11 +85,20 @@ public class AIBehaviour : MonoBehaviour
 
     bool Found()
     {
+       
         return false;
     }
+    //private void Update()
+    //{
+            
+    // if (animator.GetBool("Found"))
+    //    {
+    //        Debug.Log("jaaaajaaa mannekes");
+    //        Found = true;
+    //    }
+    //}
 
-
-    IEnumerator<NodeResult> PlayAngryAnimation()
+IEnumerator<NodeResult> PlayAngryAnimation()
     {
 
         //play the animation
@@ -128,6 +137,7 @@ public class AIBehaviour : MonoBehaviour
     {
 
         //look at player
+        _maxRoamDistance = 0;
 
 
         yield return NodeResult.Succes;

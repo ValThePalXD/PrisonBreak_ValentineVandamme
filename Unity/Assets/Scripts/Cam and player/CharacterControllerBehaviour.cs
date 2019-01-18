@@ -4,19 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterControllerBehaviour : MonoBehaviour
 {
+    [Header("Game won?")]
+    [SerializeField]
+    private bool gameWon = false;
+
+    [SerializeField]
+    private bool gameLost = false;
+
+
+
     [Header("Animation Parameters")]
     [SerializeField]
-    private Animator _anim;
+    private Animator _animator;
 
     [SerializeField]
     private float InputX;
 
     [SerializeField]
     private float InputY;
+
+
+    [Header("Animation AI")]
+    [SerializeField]
+    private Animator _animatorEnemy;
+
+    [SerializeField]
+    private Animator _animatorEnemy2;
 
 
     [Header("Climbing Parameters")]
@@ -63,9 +81,9 @@ public class CharacterControllerBehaviour : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _anim = this.gameObject.GetComponent<Animator>();
+        _animator = this.gameObject.GetComponent<Animator>();
 #if DEBUG
-        Assert.IsNotNull(_anim, "Dependency Error: This component needs an Animator  to work.");
+        Assert.IsNotNull(_animator, "Dependency Error: This component needs an Animator  to work.");
         Assert.IsNotNull(_characterController, "Dependency Error: This component needs a CharacterController to work.");
         Assert.IsNotNull(_absoluteForward, "Dependency Error: Set the Absolute Forward field.");
 #endif
@@ -73,16 +91,20 @@ public class CharacterControllerBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!gameWon && !gameLost)
+        {
 
-        _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
+        }
+        
         
 
         InputY = Input.GetAxis("Vertical");
         InputX = Input.GetAxis("Horizontal");
 
-        _anim.SetFloat("InputY", InputY);
-        _anim.SetFloat("InputX", InputX);
+        _animator.SetFloat("InputY", InputY);
+        _animator.SetFloat("InputX", InputX);
 
    
         //if u walk backwards, you go slower
@@ -98,24 +120,77 @@ public class CharacterControllerBehaviour : MonoBehaviour
             _maxWalkingSpeed = _maxForwardSpeed;
 
         }
+
+
+        SceneReload();
+
+       
+
+
+
     }
+    #region ReloadScene and dance
+
+
+    private void SceneReload()
+    {
+        if (Input.GetButton("XButton"))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "dance")
+        {
+            _animator.SetBool("IsDancing", true);
+            gameWon = true;
+            this.gameObject.transform.position = Vector3.Lerp(this.gameObject.transform.position, other.gameObject.transform.position, 0.5f);
+
+        }
+
+        if (other.tag == "reload")
+        {
+            SceneManager.LoadScene(0);
+
+        }
+
+        if (other.tag == "praying")
+        {
+            _animatorEnemy.SetBool("Found", true);
+            _animatorEnemy2.SetBool("Found", true);
+            _animator.SetBool("IsPraying", true);
+            _movement = Vector3.zero;
+            gameLost = true;
+
+
+        }
+
+    }
+
+
+
+    #endregion
+
 
     void FixedUpdate()
     {
-      
-        ApplyGround();
-        ApplyGravity();
-        ApplyMovement();
-        ApplyGroundDrag();
+ 
+            ApplyGround();
+            ApplyMovement();
+            ApplyGroundDrag();
 
-        AnimatorBooleans();
+            AnimatorBooleans();
+
+            CamFollow();
+
+            ApplyGravity();
+
+            LimitMaximumRunningSpeed();
         
-        CamFollow();
-
-       
-        LimitMaximumRunningSpeed();
-
-        _characterController.Move(_velocity * Time.deltaTime);
+            _characterController.Move(_velocity * Time.deltaTime);
+        
 
     }
 
@@ -132,7 +207,7 @@ public class CharacterControllerBehaviour : MonoBehaviour
     #region Animator
     private void AnimatorBooleans()
     {
-        _anim.SetBool("IsGrounded", _characterController.isGrounded);
+        _animator.SetBool("IsGrounded", _characterController.isGrounded);
        
        
     }
@@ -206,17 +281,31 @@ public class CharacterControllerBehaviour : MonoBehaviour
     {
 
         gameObject.transform.position = EndPos.transform.position;
-        _anim.SetBool("IsClimbing", false);
+        _animator.SetBool("IsClimbing", false);
       
 
     }
     
     public void FinishPush()
     {
-        _anim.SetBool("IsPushing", false);
+        _animator.SetBool("IsPushing", false);
 
+    }
+
+    public void ButtonPressed()
+    {
+        _animator.SetBool("IsPressing", false);
+    }
+
+
+    public void FinishPray()
+    {
+        _animator.SetBool("IsPraying", false);
+        SceneManager.LoadScene(0);
     }
 
 
     #endregion
+
+  
 }
