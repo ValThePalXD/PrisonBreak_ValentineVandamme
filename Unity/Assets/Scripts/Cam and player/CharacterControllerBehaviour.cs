@@ -50,10 +50,10 @@ public class CharacterControllerBehaviour : MonoBehaviour
     private float _mass = 66.7f; // the average weight of an adult woman in Belgium is 66.7 kg
 
     [SerializeField]
-    private float _acceleration = 3; // [m/s^2]
+    private float _acceleration = 2; // [m/s^2]
 
     [SerializeField]
-    private float _dragOnGround = 1; // []
+    private float _dragOnGround = 30; // []
 
     [SerializeField]
     private float _maxWalkingSpeed = (5.0f * 1000) / (60 * 60); // setting default forwardspeed
